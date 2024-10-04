@@ -38,6 +38,10 @@ private fun readSubject(prompt: String): String {
     }
 }
 
+fun String.titleCase(): String {
+    return this.mapIndexed {i, c -> if (i > 0) c.lowercase() else c.uppercase()}.joinToString("")
+}
+
 fun main() {
     try {
         acc = Account(Parameters.config.userToken)
@@ -61,7 +65,7 @@ fun show(){
         println("Class: ${hw.name}")
         hw.assignments.forEach {
             println("\t- ${it.assignmentDetails}")
-            println("\t  Due: ${it.dueDate}")
+            println("\t  Due: ${it.dueDate.dayOfWeek.name.titleCase()}, ${it.dueDate.month.value}/${it.dueDate.dayOfMonth}")
         }
     }
 }

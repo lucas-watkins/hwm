@@ -5,9 +5,13 @@ import kotlinx.serialization.json.Json
 import java.io.File
 
 @Serializable
-data class Config(val dbUrl: String, val dbUsername: String, val dbPassword: String, val dbDriver: String)
+data class Config(internal val dbUrl: String,
+                  internal val dbUsername: String,
+                  internal val dbPassword: String,
+                  internal val dbDriver: String,
+                  val userToken: String)
 
 object Parameters {
-    val configFilePath = "config.json" //TODO("make this into a when statement to replace MainKt")
+    val configFilePath = "config.json"
     val config = Json.decodeFromString<Config>(File(configFilePath).readText())
 }
